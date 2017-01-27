@@ -2,10 +2,12 @@ package org.exercise.pizza.initdb;
 
 import org.exercise.pizza.model.Cheese;
 import org.exercise.pizza.model.Crust;
+import org.exercise.pizza.model.Ingredient;
 import org.exercise.pizza.model.Sauce;
 import org.exercise.pizza.model.Size;
 import org.exercise.pizza.service.CheeseService;
 import org.exercise.pizza.service.CrustService;
+import org.exercise.pizza.service.IngredientService;
 import org.exercise.pizza.service.SauceService;
 import org.exercise.pizza.service.SizeService;
 import org.slf4j.Logger;
@@ -31,6 +33,9 @@ public class InitDB implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired
     private SizeService sizeService;
+
+    @Autowired
+    private IngredientService ingredientService;
 
     public void populateCheese() {
         cheeseService.save(new Cheese("mozzarella"));
@@ -61,11 +66,22 @@ public class InitDB implements ApplicationListener<ApplicationReadyEvent> {
         log.info("Sizes populated");
     }
 
+    public void populateIngredients() {
+        ingredientService.save(new Ingredient("ham"));
+        ingredientService.save(new Ingredient("pineapple"));
+        ingredientService.save(new Ingredient("egg"));
+        ingredientService.save(new Ingredient("corn"));
+        ingredientService.save(new Ingredient("onion"));
+        ingredientService.save(new Ingredient("olives"));
+        log.info("Ingredients populated");
+    }
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         populateCheese();
         populateSauces();
         populateCrusts();
         populateSizes();
+        populateIngredients();
     }
 }
