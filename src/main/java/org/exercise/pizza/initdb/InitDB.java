@@ -3,9 +3,11 @@ package org.exercise.pizza.initdb;
 import org.exercise.pizza.model.Cheese;
 import org.exercise.pizza.model.Crust;
 import org.exercise.pizza.model.Sauce;
+import org.exercise.pizza.model.Size;
 import org.exercise.pizza.service.CheeseService;
 import org.exercise.pizza.service.CrustService;
 import org.exercise.pizza.service.SauceService;
+import org.exercise.pizza.service.SizeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class InitDB implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired
     private CrustService crustService;
+
+    @Autowired
+    private SizeService sizeService;
 
     public void populateCheese() {
         cheeseService.save(new Cheese("mozzarella"));
@@ -48,10 +53,19 @@ public class InitDB implements ApplicationListener<ApplicationReadyEvent> {
         log.info("Crusts populated");
     }
 
+    public void populateSizes() {
+        sizeService.save(new Size("personal", 10, 4));
+        sizeService.save(new Size("small", 20, 6));
+        sizeService.save(new Size("medium", 30, 8));
+        sizeService.save(new Size("large", 40, 10));
+        log.info("Sizes populated");
+    }
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         populateCheese();
         populateSauces();
         populateCrusts();
+        populateSizes();
     }
 }
