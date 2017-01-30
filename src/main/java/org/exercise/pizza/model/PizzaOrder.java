@@ -33,22 +33,28 @@ public class PizzaOrder {
     @ManyToOne
     private Crust crust;
 
+    @ManyToOne
+    private Size size;
+
+    private Integer slices;
     private String comment;
     private String status;
 
     public PizzaOrder() {
     }
 
-    public PizzaOrder(PizzaType pizzaType, List<Ingredient> ingredients, Cheese cheese, Sauce sauce, Crust crust, String comment) {
-        this(pizzaType, ingredients, cheese, sauce, crust, comment, OrderStatus.NEW);
+    public PizzaOrder(PizzaType pizzaType, List<Ingredient> ingredients, Cheese cheese, Sauce sauce, Crust crust, Size size, Integer slices, String comment) {
+        this(pizzaType, ingredients, cheese, sauce, crust, size, slices, comment, OrderStatus.NEW);
     }
 
-    public PizzaOrder(PizzaType pizzaType, List<Ingredient> ingredients, Cheese cheese, Sauce sauce, Crust crust, String comment, String status) {
+    public PizzaOrder(PizzaType pizzaType, List<Ingredient> ingredients, Cheese cheese, Sauce sauce, Crust crust, Size size, Integer slices, String comment, String status) {
         this.pizzaType = pizzaType;
         this.ingredients = ingredients;
         this.cheese = cheese;
         this.sauce = sauce;
         this.crust = crust;
+        this.size = size;
+        this.slices = slices;
         this.comment = comment;
         this.status = status;
     }
@@ -99,6 +105,22 @@ public class PizzaOrder {
 
     public void setCrust(Crust crust) {
         this.crust = crust;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public Integer getSlices() {
+        return slices;
+    }
+
+    public void setSlices(Integer slices) {
+        this.slices = slices;
     }
 
     public String getComment() {

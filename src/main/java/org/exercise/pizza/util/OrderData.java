@@ -10,15 +10,19 @@ public class OrderData {
     private String sauce;
     private String crust;
     private String comment;
+    private String size;
+    private Integer slices = -1;
 
     public OrderData() {
     }
 
-    public OrderData(List<String> remove, List<String> extra, String cheese, String sauce, String crust, String comment) {
+    public OrderData(List<String> remove, List<String> extra, String cheese, String sauce, String crust, String comment, String size, Integer slices) {
         this.remove = remove;
         this.extra = extra;
         this.cheese = cheese;
         this.sauce = sauce;
+        this.size = size;
+        this.slices = slices;
         this.crust = crust;
         this.comment = comment;
     }
@@ -69,6 +73,22 @@ public class OrderData {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public Integer getSlices() {
+        return slices;
+    }
+
+    public void setSlices(Integer slices) {
+        this.slices = slices;
     }
 
 }

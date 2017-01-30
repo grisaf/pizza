@@ -6,6 +6,7 @@ import java.util.List;
 import org.exercise.pizza.dao.CheeseRepository;
 import org.exercise.pizza.dao.CrustRepository;
 import org.exercise.pizza.dao.SauceRepository;
+import org.exercise.pizza.dao.SizeRepository;
 import org.exercise.pizza.model.Cheese;
 import org.exercise.pizza.model.Crust;
 import org.exercise.pizza.model.Ingredient;
@@ -14,6 +15,7 @@ import org.exercise.pizza.model.PizzaType;
 import org.exercise.pizza.model.ProductOrder;
 import org.exercise.pizza.model.ProductType;
 import org.exercise.pizza.model.Sauce;
+import org.exercise.pizza.model.Size;
 import org.exercise.pizza.service.IngredientService;
 import org.exercise.pizza.util.OrderData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class OrderFactory {
 
     @Autowired
     private CrustRepository crustRepository;
+
+    @Autowired
+    private SizeRepository sizeRepository;
 
     @Autowired
     private IngredientService ingredientService;
@@ -62,8 +67,13 @@ public class OrderFactory {
         Cheese cheese = cheeseRepository.findOneByNameContainsIgnoreCase(orderData.getCheese());
         Sauce sauce = sauceRepository.findOneByNameContainsIgnoreCase(orderData.getSauce());
         Crust crust = crustRepository.findOneByNameContainsIgnoreCase(orderData.getCrust());
+        Size size = sizeRepository.findOneByNameContainsIgnoreCase(orderData.getSize());
+        int slices = orderData.getSlices();
+        if (slices == -1) {
+            slices = size.getSlices();
+        }
         String comment = orderData.getComment();
-        PizzaOrder order = new PizzaOrder(pizzaType, ingredients, cheese, sauce, crust, comment);
+        PizzaOrder order = new PizzaOrder(pizzaType, ingredients, cheese, sauce, crust, size, slices, comment);
         return order;
     }
 
