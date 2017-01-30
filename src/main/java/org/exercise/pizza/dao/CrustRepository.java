@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CrustRepository extends JpaRepository<Crust, Long> {
 
+    public Crust findOneByNameContainsIgnoreCase(String name);
+
 }

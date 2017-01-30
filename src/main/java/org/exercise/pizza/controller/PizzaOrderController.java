@@ -6,7 +6,6 @@ import org.exercise.pizza.model.PizzaOrder;
 import org.exercise.pizza.service.PizzaOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,17 +28,17 @@ public class PizzaOrderController {
     }
 
     @RequestMapping(value = "/{id}/prepare", method = RequestMethod.GET)
-    public PizzaOrder prepare(@RequestBody Long id) {
+    public PizzaOrder prepare(@PathVariable Long id) {
         return pizzaOrderService.prepare(id);
     }
 
     @RequestMapping(value = "/{id}/deliver", method = RequestMethod.GET)
-    public PizzaOrder deliver(@RequestBody Long id) {
+    public PizzaOrder deliver(@PathVariable Long id) {
         return pizzaOrderService.deliver(id);
     }
 
     @RequestMapping(value = "/{id}/cancel", method = RequestMethod.GET)
-    public PizzaOrder cancel(@RequestBody Long id) {
+    public PizzaOrder cancel(@PathVariable Long id) {
         return pizzaOrderService.cancel(id);
     }
 

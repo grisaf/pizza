@@ -2,8 +2,10 @@ package org.exercise.pizza.controller;
 
 import java.util.List;
 
+import org.exercise.pizza.model.PizzaOrder;
 import org.exercise.pizza.model.PizzaType;
 import org.exercise.pizza.service.PizzaTypeService;
+import org.exercise.pizza.util.OrderData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +43,11 @@ public class PizzaTypeController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public PizzaType delete(@PathVariable Long id) {
         return pizzaTypeService.disable(id);
+    }
+
+    @RequestMapping(value = "/{id}/order", method = RequestMethod.POST)
+    public PizzaOrder order(@PathVariable Long id, @RequestBody OrderData orderData) {
+        return pizzaTypeService.order(id, orderData);
     }
 
 }

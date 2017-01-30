@@ -3,8 +3,11 @@ package org.exercise.pizza.service;
 import java.util.List;
 
 import org.exercise.pizza.dao.PizzaTypeRepository;
+import org.exercise.pizza.factory.OrderFactory;
 import org.exercise.pizza.model.Ingredient;
+import org.exercise.pizza.model.PizzaOrder;
 import org.exercise.pizza.model.PizzaType;
+import org.exercise.pizza.util.OrderData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,13 @@ public class PizzaTypeService {
 
     @Autowired
     private IngredientService ingredientService;
-    
+
+    @Autowired
+    private PizzaOrderService pizzaOrderService;
+
+    @Autowired
+    private OrderFactory orderFactory;
+
     public PizzaType save(PizzaType pizzaType) {
         if (pizzaType.getIngredients() != null) {
             for (int i = 0; i < pizzaType.getIngredients().size(); i++) {
@@ -58,6 +67,12 @@ public class PizzaTypeService {
         PizzaType pizzaType = get(id);
         pizzaType.setActive(false);
         return save(pizzaType);
+    }
+
+    public PizzaOrder order(Long id, OrderData orderData) {
+        PizzaType pizzaType = get(id);
+        PizzaOrder pizzaOrder = orderFactory.createPizzaOrder(pizzaType, orderData);
+        return pizzaOrderService.save(pizzaOrder);
     }
 
 }
