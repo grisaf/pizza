@@ -13,14 +13,14 @@ public class PizzaType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    private Long id;
 
-    protected String name;
+    private String name;
 
     @ManyToMany
     private List<Ingredient> ingredients;
 
-    protected Boolean active;
+    private Boolean active;
 
     public PizzaType() {
         this.active = true;

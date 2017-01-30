@@ -10,10 +10,10 @@ public class ProductType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    private Long id;
 
-    protected String name;
-    protected Boolean active;
+    private String name;
+    private Boolean active;
 
     public ProductType() {
     }
